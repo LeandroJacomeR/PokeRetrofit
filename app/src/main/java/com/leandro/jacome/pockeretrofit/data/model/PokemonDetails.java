@@ -2,13 +2,16 @@ package com.leandro.jacome.pockeretrofit.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PokemonDetails {
+public class PokemonDetails implements Serializable {
     public int id;
     public String name;
     public int height;
     public int weight;
+    @SerializedName("base_experience")
+    public int baseExperience;
     public List<TypeSlot> types;
     public List<StatSlot> stats;
     public List<AbilitySlot> abilities;
@@ -44,5 +47,29 @@ public class PokemonDetails {
 
     public Sprites getSprites() {
         return sprites;
+    }
+
+    public String getAbilitiesAsString() {
+        if (abilities == null) return "-";
+        StringBuilder sb = new StringBuilder();
+        for (AbilitySlot slot : abilities) {
+            sb.append(slot.ability.name);
+            if (slot.isHidden) sb.append(" (oculta)");
+            sb.append(", ");
+        }
+        return sb.length() > 2 ? sb.substring(0, sb.length() - 2) : sb.toString();
+    }
+
+    public String getTypesAsString() {
+        if (types == null) return "-";
+        StringBuilder sb = new StringBuilder();
+        for (TypeSlot slot : types) {
+            sb.append(slot.type.name).append(", ");
+        }
+        return sb.length() > 2 ? sb.substring(0, sb.length() - 2) : sb.toString();
+    }
+
+    public int getBaseExperience() {
+        return baseExperience;
     }
 }

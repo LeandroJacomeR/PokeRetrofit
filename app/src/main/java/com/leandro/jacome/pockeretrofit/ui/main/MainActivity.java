@@ -1,5 +1,8 @@
 package com.leandro.jacome.pockeretrofit.ui.main;
 
+import static com.leandro.jacome.pockeretrofit.utils.Constants.FAVORITES;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.POKEDEX;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,8 +53,8 @@ public class MainActivity extends BaseActivity {
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
-                case 0: tab.setText("Pokédex"); break;
-                case 1: tab.setText("Favoritos"); break;
+                case 0: tab.setText(POKEDEX); break;
+                case 1: tab.setText(FAVORITES); break;
                 default: tab.setText("Tab " + (position + 1)); break;
             }
         }).attach();

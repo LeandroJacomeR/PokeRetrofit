@@ -8,7 +8,6 @@
     android:background="@android:color/white"
     android:padding="16dp">
 
-
     <LinearLayout
         android:id="@+id/containerAbout"
         android:layout_width="match_parent"
@@ -31,6 +30,7 @@
             android:textColor="#333"
             android:textSize="16sp" />
 
+        <!-- Bloque de altura/peso -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,17 +47,21 @@
 
                 <TextView
                     android:id="@+id/tvHeight"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="1' 04"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:minWidth="100dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Height"
+                    android:text="Altura"
                     android:textColor="#888" />
             </LinearLayout>
 
@@ -70,17 +74,21 @@
 
                 <TextView
                     android:id="@+id/tvWeight"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="13.2 lbs"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:minWidth="100dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Weight"
+                    android:text="Peso"
                     android:textColor="#888" />
             </LinearLayout>
         </LinearLayout>
@@ -91,6 +99,7 @@
             android:layout_marginVertical="16dp"
             android:background="#DDD" />
 
+        <!-- Bloque de categoría/habilidades -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,17 +116,21 @@
 
                 <TextView
                     android:id="@+id/tvCategory"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="Mouse"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:minWidth="100dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category"
+                    android:text="Categoria"
                     android:textColor="#888" />
             </LinearLayout>
 
@@ -130,17 +143,90 @@
 
                 <TextView
                     android:id="@+id/tvAbilities"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="Static"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:minWidth="100dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abilities"
+                    android:text="Habilidades"
+                    android:textColor="#888" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="16dp"
+            android:background="#DDD" />
+
+        <!-- Bloque de tipos/experiencia -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTypes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Types"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:minWidth="100dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipos"
+                    android:textColor="#888" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBaseExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Base experience"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:minWidth="100dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XP Base"
                     android:textColor="#888" />
             </LinearLayout>
         </LinearLayout>

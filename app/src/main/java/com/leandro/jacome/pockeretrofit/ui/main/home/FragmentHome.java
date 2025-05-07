@@ -41,7 +41,7 @@ public class FragmentHome extends Fragment implements HomeContract.View{
         recyclerView.setAdapter(adapter);
 
         presenter = new HomePresenter(this);
-        presenter.loadPokemons(); // Usa el nombre correcto del método
+        presenter.loadPokemons();
 
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.loadPokemons());
 

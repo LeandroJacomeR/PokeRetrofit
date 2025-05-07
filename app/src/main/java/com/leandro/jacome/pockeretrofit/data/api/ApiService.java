@@ -1,19 +1,25 @@
 package com.leandro.jacome.pockeretrofit.data.api;
 
-import com.leandro.jacome.pockeretrofit.data.model.Pokemon;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.GET_ALL_POKEMON;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.GET_POKEMON_DESC;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.GET_POKEMON_ID;
+
 import com.leandro.jacome.pockeretrofit.data.model.PokemonDetails;
 import com.leandro.jacome.pockeretrofit.data.model.PokemonResponse;
-
-import java.util.List;
+import com.leandro.jacome.pockeretrofit.data.model.desc.PokemonSpecies;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
-    @GET("pokemon")
+    @GET(GET_ALL_POKEMON)
     Call<PokemonResponse> getPokemonList(@Query("limit") int limit);
 
-    @GET("pokemon/{id}")
-    Call<PokemonDetails> getPokemon(int id);
+    @GET(GET_POKEMON_ID)
+    Call<PokemonDetails> getPokemon(@Path("id") int id);
+
+    @GET(GET_POKEMON_DESC)
+    Call<PokemonSpecies> getDescription(@Path("id") int id);
 }

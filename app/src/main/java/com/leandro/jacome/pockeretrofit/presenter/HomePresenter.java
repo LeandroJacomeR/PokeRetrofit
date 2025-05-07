@@ -44,7 +44,7 @@ public class HomePresenter implements HomeContract.Presenter {
                     view.hideLoading();
                     if (response.isSuccessful() && response.body() != null) {
                         List<Pokemon> list = response.body().getResults();
-                        view.showPokemons(list);  // Usa el nombre correcto del método
+                        view.showPokemons(list);
                     } else {
                         view.showError(MSG_ERROR);
                     }

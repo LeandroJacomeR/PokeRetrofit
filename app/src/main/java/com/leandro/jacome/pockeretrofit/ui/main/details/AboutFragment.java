@@ -4,6 +4,7 @@ import static com.leandro.jacome.pockeretrofit.utils.Constants.FORMAT_HEIGHT;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.FORMAT_WEIGHT;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.TV_SET_XP;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,9 +80,42 @@ public class AboutFragment extends Fragment {
             tvBaseExperience.setText(pokemonDetails.getBaseExperience() + TV_SET_XP);
         }
 
+        FrameLayout background = requireView().findViewById(R.id.imageBackgroundContainer);
+
+        if (pokemonSpecies != null && background != null) {
+            int bgColor = getColorFromName(pokemonSpecies.getColorName());
+
+            // Obtén el fondo redondeado
+            GradientDrawable drawable = (GradientDrawable) getResources().getDrawable(R.drawable.rounded_bottom_background);
+            // Cambia el color de fondo dinámicamente
+            drawable.setColor(bgColor);
+            // Aplica el fondo redondeado con color modificado
+            background.setBackground(drawable);
+        }
+
         if (pokemonSpecies != null && tvDescription != null) {
             tvDescription.setText(pokemonSpecies.getDescription());
             tvCategory.setText(String.valueOf(pokemonSpecies.getCategoryEs()));
         }
     }
+
+
+
+    private int getColorFromName(String name) {
+        if (name == null) return getResources().getColor(R.color.default_bg);
+
+        switch (name.toLowerCase()) {
+            case "red": return getResources().getColor(R.color.poke_red);
+            case "blue": return getResources().getColor(R.color.poke_blue);
+            case "green": return getResources().getColor(R.color.poke_green);
+            case "yellow": return getResources().getColor(R.color.poke_yellow);
+            case "purple": return getResources().getColor(R.color.poke_purple);
+            case "brown": return getResources().getColor(R.color.poke_brown);
+            case "pink": return getResources().getColor(R.color.poke_pink);
+            case "black": return getResources().getColor(R.color.poke_black);
+            case "white": return getResources().getColor(R.color.poke_white);
+            default: return getResources().getColor(R.color.default_bg);
+        }
+    }
+
 }

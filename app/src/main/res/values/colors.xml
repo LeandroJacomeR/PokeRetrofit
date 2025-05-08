@@ -4,4 +4,16 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#673AB7</color>
     <color name="gray">#A7A7A7</color>
+
+    <color name="poke_red">#EF5350</color>
+    <color name="poke_blue">#42A5F5</color>
+    <color name="poke_green">#66BB6A</color>
+    <color name="poke_yellow">#FFEB3B</color>
+    <color name="poke_purple">#AB47BC</color>
+    <color name="poke_brown">#A1887F</color>
+    <color name="poke_pink">#F48FB1</color>
+    <color name="poke_black">#212121</color>
+    <color name="poke_white">#F5F5F5</color>
+    <color name="default_bg">#E0E0E0</color>
+
 </resources>

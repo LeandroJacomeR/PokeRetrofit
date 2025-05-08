@@ -1,5 +1,7 @@
 package com.leandro.jacome.pockeretrofit.data.model;
 
+import static com.leandro.jacome.pockeretrofit.utils.Constants.GIF_EXT;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.GIF_URL;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.IMG_URL;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.PNG_EXT;
 
@@ -22,5 +24,9 @@ public class Pokemon {
 
     public String getImageUrl() {
         return IMG_URL + getId() + PNG_EXT;
+    }
+
+    public String getGifUrl() {
+        return GIF_URL + getId() + GIF_EXT;
     }
 }

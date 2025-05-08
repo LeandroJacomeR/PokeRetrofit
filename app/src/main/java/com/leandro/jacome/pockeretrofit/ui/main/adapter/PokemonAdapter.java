@@ -42,7 +42,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         holder.id.setText("#" + p.getId());
         holder.name.setText(pokemonUpper);
 
-        Glide.with(holder.itemView.getContext()).load(p.getImageUrl()).into(holder.image);
+        Glide.with(holder.itemView.getContext())
+                .asGif()
+                .load(p.getGifUrl())
+                .into(holder.image);
 
         holder.itemView.setOnClickListener(v -> {
             DetailsActivity.start(v.getContext(), p, p.getId());

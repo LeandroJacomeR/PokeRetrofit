@@ -17,7 +17,8 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
     private PokemonSpecies pokemonSpecies;
     private String imageUrl;
 
-    private AboutFragment aboutFragment = new AboutFragment(); // mantenemos la instancia
+    private AboutFragment aboutFragment = new AboutFragment();
+    private StatsFragment statsFragment = new StatsFragment();
 
     public DetailsPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -27,8 +28,10 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
         this.pokemonDetails = details;
         this.imageUrl = imgUrl;
         aboutFragment.setData(pokemonDetails, imageUrl, pokemonSpecies);
+        statsFragment.setData(pokemonDetails); // 👈 pasar los datos aquí
         notifyDataSetChanged();
     }
+
 
     public void setDescription(PokemonSpecies desc) {
         this.pokemonSpecies = desc;
@@ -41,7 +44,7 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: return aboutFragment;
-            case 1: return new StatsFragment();
+            case 1: return statsFragment;
             case 2: return new EvolutionFragment();
             default: return new Fragment();
         }

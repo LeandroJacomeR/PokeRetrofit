@@ -1,5 +1,8 @@
 package com.leandro.jacome.pockeretrofit.data.model;
 
+import static com.leandro.jacome.pockeretrofit.utils.Constants.HIDDEN_SKILL;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.SER_NAME_BASE_XP;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -10,7 +13,7 @@ public class PokemonDetails implements Serializable {
     public String name;
     public int height;
     public int weight;
-    @SerializedName("base_experience")
+    @SerializedName(SER_NAME_BASE_XP)
     public int baseExperience;
     public List<TypeSlot> types;
     public List<StatSlot> stats;
@@ -54,7 +57,7 @@ public class PokemonDetails implements Serializable {
         StringBuilder sb = new StringBuilder();
         for (AbilitySlot slot : abilities) {
             sb.append(slot.ability.name);
-            if (slot.isHidden) sb.append(" (oculta)");
+            if (slot.isHidden) sb.append(HIDDEN_SKILL);
             sb.append(", ");
         }
         return sb.length() > 2 ? sb.substring(0, sb.length() - 2) : sb.toString();

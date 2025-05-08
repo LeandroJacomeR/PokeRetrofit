@@ -45,13 +45,18 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         Glide.with(holder.itemView.getContext()).load(p.getImageUrl()).into(holder.image);
 
         holder.itemView.setOnClickListener(v -> {
-            DetailsActivity.start(v.getContext(), p, position + 1);
+            DetailsActivity.start(v.getContext(), p, p.getId());
         });
     }
 
     @Override
     public int getItemCount() {
         return pokemonList.size();
+    }
+
+    public void updateList(List<Pokemon> newList) {
+        pokemonList = new ArrayList<>(newList);
+        notifyDataSetChanged();
     }
 
     public static class PokemonViewHolder extends RecyclerView.ViewHolder {

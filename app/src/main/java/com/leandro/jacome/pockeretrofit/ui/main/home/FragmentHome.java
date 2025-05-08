@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.leandro.jacome.pockeretrofit.presenter.HomeContract;
 import com.leandro.jacome.pockeretrofit.presenter.HomePresenter;
 import com.leandro.jacome.pockeretrofit.ui.main.adapter.PokemonAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentHome extends Fragment implements HomeContract.View{
@@ -27,6 +29,8 @@ public class FragmentHome extends Fragment implements HomeContract.View{
     private SwipeRefreshLayout swipeRefreshLayout;
     private HomeContract.Presenter presenter;
     private PokemonAdapter adapter;
+    private SearchView searchView;
+    private List<Pokemon> originalList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -36,9 +40,11 @@ public class FragmentHome extends Fragment implements HomeContract.View{
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         recyclerView = view.findViewById(R.id.recyclerPokemon);
+        searchView = view.findViewById(R.id.searchView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PokemonAdapter();
         recyclerView.setAdapter(adapter);
+        setupSearchView();
 
         presenter = new HomePresenter(this);
         presenter.loadPokemons();
@@ -51,7 +57,38 @@ public class FragmentHome extends Fragment implements HomeContract.View{
     @Override
     public void showPokemons(List<Pokemon> pokemons) {
         swipeRefreshLayout.setRefreshing(false);
+        originalList.clear();                 // ← asegurate de limpiar antes
+        originalList.addAll(pokemons);        // ← esto guarda la lista original
         adapter.setData(pokemons);
+    }
+
+
+    private void setupSearchView() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterPokemonList(newText);
+                return true;
+            }
+        });
+    }
+
+    private void filterPokemonList(String query) {
+        List<Pokemon> filteredList = new ArrayList<>();
+        String searchText = query.trim().toLowerCase();
+
+        for (Pokemon pokemon : originalList) {
+            if (pokemon.getName() != null && pokemon.getName().toLowerCase().contains(searchText)) {
+                filteredList.add(pokemon);
+            }
+        }
+
+        adapter.updateList(filteredList);
     }
 
     @Override

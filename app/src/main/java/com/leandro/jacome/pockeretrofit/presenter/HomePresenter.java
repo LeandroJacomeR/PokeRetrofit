@@ -37,7 +37,7 @@ public class HomePresenter implements HomeContract.Presenter {
         if (view != null) view.showLoading();
 
         ApiService service = ApiClient.getClient().create(ApiService.class);
-        service.getPokemonList(100).enqueue(new Callback<PokemonResponse>() {
+        service.getPokemonList(1302).enqueue(new Callback<PokemonResponse>() {
             @Override
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
                 if (view != null) {

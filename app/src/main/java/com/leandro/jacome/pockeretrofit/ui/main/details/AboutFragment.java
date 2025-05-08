@@ -1,5 +1,7 @@
 package com.leandro.jacome.pockeretrofit.ui.main.details;
 
+import static com.leandro.jacome.pockeretrofit.utils.Constants.FORMAT_HEIGHT;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.FORMAT_WEIGHT;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.TV_SET_XP;
 
 import android.os.Bundle;
@@ -35,7 +37,6 @@ public class AboutFragment extends Fragment {
         this.imageUrl = imageUrl;
         this.pokemonSpecies = desc;
 
-        // Si la vista ya está creada, actualizamos
         if (isViewCreated) {
             updateUI();
         }
@@ -66,9 +67,12 @@ public class AboutFragment extends Fragment {
 
     private void updateUI() {
         if (pokemonDetails != null && imageUrl != null && imageViewDetails != null) {
+            String heightMeters = String.format(FORMAT_HEIGHT, pokemonDetails.getHeight() / 10.0);
+            String weightKg = String.format(FORMAT_WEIGHT, pokemonDetails.getWeight() / 10.0);
+
             Glide.with(requireContext()).load(imageUrl).into(imageViewDetails);
-            tvHeight.setText(String.valueOf(pokemonDetails.getHeight()));
-            tvWeight.setText(String.valueOf(pokemonDetails.getWeight()));
+            tvHeight.setText(heightMeters);
+            tvWeight.setText(weightKg);
             tvAbilities.setText(pokemonDetails.getAbilitiesAsString());
             tvTypes.setText(pokemonDetails.getTypesAsString());
             tvBaseExperience.setText(pokemonDetails.getBaseExperience() + TV_SET_XP);

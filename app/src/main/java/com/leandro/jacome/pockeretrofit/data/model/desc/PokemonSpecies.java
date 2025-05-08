@@ -1,5 +1,13 @@
 package com.leandro.jacome.pockeretrofit.data.model.desc;
 
+import static com.leandro.jacome.pockeretrofit.utils.Constants.LANGUAGE_EN;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.LANGUAGE_ES;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.SER_NAME_FLAVOR;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.SER_NAME_GENERA;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.UNKNOWN_CATEGORY;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.UNKNOWN_COLOR;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.UNKNOWN_DESCRIPTION;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -7,9 +15,9 @@ import java.util.List;
 
 public class PokemonSpecies implements Serializable {
     private Color color;
-    @SerializedName("flavor_text_entries")
+    @SerializedName(SER_NAME_FLAVOR)
     private List<FlavorTextEntries> flavorTextEntries;
-    @SerializedName("genera")
+    @SerializedName(SER_NAME_GENERA)
     private List<GenusEntry> genera;
 
     public List<GenusEntry> getGenera() {
@@ -26,20 +34,20 @@ public class PokemonSpecies implements Serializable {
 
     public String getDescription() {
         if (flavorTextEntries == null || flavorTextEntries.isEmpty()) {
-            return "Descripción no disponible";
+            return UNKNOWN_DESCRIPTION;
         }
 
-        String spanishDesc = findDescriptionByLanguage("es");
+        String spanishDesc = findDescriptionByLanguage(LANGUAGE_ES);
         if (!spanishDesc.isEmpty()) {
             return spanishDesc;
         }
 
-        String englishDesc = findDescriptionByLanguage("en");
+        String englishDesc = findDescriptionByLanguage(LANGUAGE_EN);
         if (!englishDesc.isEmpty()) {
             return englishDesc;
         }
 
-        return "Descripción no disponible";
+        return UNKNOWN_DESCRIPTION;
     }
 
     private String findDescriptionByLanguage(String languageCode) {
@@ -59,16 +67,16 @@ public class PokemonSpecies implements Serializable {
     }
 
     public String getCategoryEs() {
-        if (genera == null) return "Categoría desconocida";
+        if (genera == null) return UNKNOWN_CATEGORY;
         for (GenusEntry entry : genera) {
-            if ("es".equals(entry.language.getName())) {
+            if (LANGUAGE_ES.equals(entry.language.getName())) {
                 return entry.genus;
             }
         }
-        return "Categoría desconocida";
+        return UNKNOWN_CATEGORY;
     }
 
     public String getColorName() {
-        return color != null ? color.getName() : "desconocido";
+        return color != null ? color.getName() : UNKNOWN_COLOR;
     }
 }

@@ -2,65 +2,79 @@ package com.leandro.jacome.pockeretrofit.ui.main.details;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.leandro.jacome.pockeretrofit.R;
+import com.leandro.jacome.pockeretrofit.data.model.PokemonDetails;
+import com.leandro.jacome.pockeretrofit.data.model.StatSlot;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StatsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class StatsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private PokemonDetails pokemonDetails;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // IDs de los includes en el layout
+    private final int[] statLayoutIds = {
+            R.id.statHp, R.id.statAttack, R.id.statDefense,
+            R.id.statSpAttack, R.id.statSpDefense, R.id.statSpeed
+    };
 
-    public StatsFragment() {
-        // Required empty public constructor
+    private final String[] statKeys = {
+            "hp", "attack", "defense", "special-attack", "special-defense", "speed"
+    };
+
+    private final String[] statLabels = {
+            "HP", "Ataque", "Defensa", "Atq. Esp.", "Def. Esp.", "Velocidad"
+    };
+
+    public void setData(PokemonDetails pokemonDetails) {
+        this.pokemonDetails = pokemonDetails;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StatsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StatsFragment newInstance(String param1, String param2) {
-        StatsFragment fragment = new StatsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_stats, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        System.out.println("hola 1");
+        if (pokemonDetails != null) {
+            System.out.println("hola 2");
+            Map<String, Integer> statMap = new HashMap<>();
+            System.out.println(pokemonDetails.getName());
+            System.out.println(pokemonDetails.getId());
+            for (StatSlot s : pokemonDetails.getStats()) {
+                System.out.println(s.getStat().getName());
+                System.out.println(s.getBaseStat());
+                statMap.put(s.getStat().getName(), s.getBaseStat());
+            }
+
+            for (int i = 0; i < statKeys.length; i++) {
+                View statView = view.findViewById(statLayoutIds[i]);
+                TextView tvName = statView.findViewById(R.id.tvStatName);
+                TextView tvValue = statView.findViewById(R.id.tvStatValue);
+                ProgressBar bar = statView.findViewById(R.id.progressStat);
+
+                tvName.setText(statLabels[i]);
+
+                int value = statMap.getOrDefault(statKeys[i], 0);
+                tvValue.setText(String.valueOf(value));
+                bar.setProgress(value);
+            }
+        }
     }
 }

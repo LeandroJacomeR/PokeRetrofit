@@ -10,14 +10,14 @@
         android:id="@+id/tvStatName"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="HP"
+        android:text=" "
         android:textColor="#444" />
 
     <TextView
         android:id="@+id/tvStatValue"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="90"
+        android:text="0"
         android:textColor="#000"
         android:textStyle="bold"
         android:gravity="end" />
@@ -32,5 +32,5 @@
         android:progressTint="#37996B"
         android:backgroundTint="#E0E0E0"
         android:max="255"
-        android:progress="90" />
+        android:progress="0" />
 </LinearLayout>

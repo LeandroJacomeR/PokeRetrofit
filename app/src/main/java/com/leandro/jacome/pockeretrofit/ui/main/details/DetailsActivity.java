@@ -59,7 +59,7 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0: tab.setText(ABOUT); break;
-                case 2: tab.setText(EVOLUTION); break;
+                case 1: tab.setText(EVOLUTION); break;
             }
         }).attach();
     }

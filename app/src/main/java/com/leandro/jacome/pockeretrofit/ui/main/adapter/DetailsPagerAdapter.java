@@ -41,7 +41,7 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: return aboutFragment;
-            case 2: return new EvolutionFragment();
+            case 1: return new EvolutionFragment();
             default: return new Fragment();
         }
     }

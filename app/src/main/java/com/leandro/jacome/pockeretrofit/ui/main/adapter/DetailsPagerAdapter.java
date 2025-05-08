@@ -9,7 +9,6 @@ import com.leandro.jacome.pockeretrofit.data.model.PokemonDetails;
 import com.leandro.jacome.pockeretrofit.data.model.desc.PokemonSpecies;
 import com.leandro.jacome.pockeretrofit.ui.main.details.AboutFragment;
 import com.leandro.jacome.pockeretrofit.ui.main.details.EvolutionFragment;
-import com.leandro.jacome.pockeretrofit.ui.main.details.StatsFragment;
 
 public class DetailsPagerAdapter extends FragmentStateAdapter {
 
@@ -18,7 +17,6 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
     private String imageUrl;
 
     private AboutFragment aboutFragment = new AboutFragment();
-    private StatsFragment statsFragment = new StatsFragment();
 
     public DetailsPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -28,7 +26,6 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
         this.pokemonDetails = details;
         this.imageUrl = imgUrl;
         aboutFragment.setData(pokemonDetails, imageUrl, pokemonSpecies);
-        statsFragment.setData(pokemonDetails); // 👈 pasar los datos aquí
         notifyDataSetChanged();
     }
 
@@ -44,7 +41,6 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: return aboutFragment;
-            case 1: return statsFragment;
             case 2: return new EvolutionFragment();
             default: return new Fragment();
         }
@@ -52,6 +48,6 @@ public class DetailsPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 }

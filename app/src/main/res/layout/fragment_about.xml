@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Nombre"
+                    android:text=" "
                     android:textColor="#000"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -259,6 +259,37 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/statsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:id="@+id/tvBaseStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Base Stats"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Reutilizable: fila para cada estadística -->
+            <!-- 1. HP -->
+            <include layout="@layout/item_stat" android:id="@+id/statHp"/>
+            <!-- 2. Ataque -->
+            <include layout="@layout/item_stat" android:id="@+id/statAttack"/>
+            <!-- 3. Defensa -->
+            <include layout="@layout/item_stat" android:id="@+id/statDefense"/>
+            <!-- 4. Ataque Especial -->
+            <include layout="@layout/item_stat" android:id="@+id/statSpAttack"/>
+            <!-- 5. Defensa Especial -->
+            <include layout="@layout/item_stat" android:id="@+id/statSpDefense"/>
+            <!-- 6. Velocidad -->
+            <include layout="@layout/item_stat" android:id="@+id/statSpeed"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

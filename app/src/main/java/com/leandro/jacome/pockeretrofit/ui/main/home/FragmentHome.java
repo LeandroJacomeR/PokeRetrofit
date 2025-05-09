@@ -57,8 +57,8 @@ public class FragmentHome extends Fragment implements HomeContract.View{
     @Override
     public void showPokemons(List<Pokemon> pokemons) {
         swipeRefreshLayout.setRefreshing(false);
-        originalList.clear();                 // ← asegurate de limpiar antes
-        originalList.addAll(pokemons);        // ← esto guarda la lista original
+        originalList.clear();
+        originalList.addAll(pokemons);
         adapter.setData(pokemons);
     }
 

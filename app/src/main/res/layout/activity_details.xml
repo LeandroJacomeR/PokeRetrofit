@@ -1,19 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/detailContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Contenido principal (fragments) -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerDetail"
+    <!-- Botón flotante encima de todo -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/tabLayoutDetail"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="match_parent">
 
-    <!-- Barra de pestañas en la parte inferior -->
+        <!-- Contenido principal -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/tabLayoutDetail"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingBottom="60dp"/>
+
+        <!-- Botón atrás -->
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="@null"
+            android:src="@drawable/back"
+            android:layout_gravity="start|top"/>
+    </FrameLayout>
+
+    <!-- Tabs abajo -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutDetail"
         android:layout_width="match_parent"
@@ -25,6 +42,6 @@
         app:tabTextColor="@color/gray"
         android:paddingBottom="12dp"/>
 
-    <!-- Loader incluido -->
+    <!-- Loader centrado -->
     <include layout="@layout/view_global_loader"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

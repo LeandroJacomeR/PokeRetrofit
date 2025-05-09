@@ -15,5 +15,6 @@
     <color name="poke_black">#212121</color>
     <color name="poke_white">#F5F5F5</color>
     <color name="default_bg">#E0E0E0</color>
+    <color name="default_stat">#000000</color>
 
 </resources>

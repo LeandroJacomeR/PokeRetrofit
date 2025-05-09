@@ -2,6 +2,7 @@ package com.leandro.jacome.pockeretrofit.data.model.desc;
 
 import static com.leandro.jacome.pockeretrofit.utils.Constants.LANGUAGE_EN;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.LANGUAGE_ES;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.SER_EVO_CHAIN;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.SER_NAME_FLAVOR;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.SER_NAME_GENERA;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.UNKNOWN_CATEGORY;
@@ -19,6 +20,12 @@ public class PokemonSpecies implements Serializable {
     private List<FlavorTextEntries> flavorTextEntries;
     @SerializedName(SER_NAME_GENERA)
     private List<GenusEntry> genera;
+    @SerializedName(SER_EVO_CHAIN)
+    private EvolutionChainLink evolutionChain;
+
+    public EvolutionChainLink getEvolutionChain() {
+        return evolutionChain;
+    }
 
     public List<GenusEntry> getGenera() {
         return genera;

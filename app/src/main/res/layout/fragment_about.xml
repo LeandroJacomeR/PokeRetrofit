@@ -260,36 +260,48 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/statsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:paddingBottom="15dp">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvBaseStats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="Base Stats"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_marginBottom="12dp"/>
+                android:textStyle="bold" />
 
             <!-- Reutilizable: fila para cada estadística -->
             <!-- 1. HP -->
-            <include layout="@layout/item_stat" android:id="@+id/statHp"/>
+            <include
+                android:id="@+id/statHp"
+                layout="@layout/item_stat" />
             <!-- 2. Ataque -->
-            <include layout="@layout/item_stat" android:id="@+id/statAttack"/>
+            <include
+                android:id="@+id/statAttack"
+                layout="@layout/item_stat" />
             <!-- 3. Defensa -->
-            <include layout="@layout/item_stat" android:id="@+id/statDefense"/>
+            <include
+                android:id="@+id/statDefense"
+                layout="@layout/item_stat" />
             <!-- 4. Ataque Especial -->
-            <include layout="@layout/item_stat" android:id="@+id/statSpAttack"/>
+            <include
+                android:id="@+id/statSpAttack"
+                layout="@layout/item_stat" />
             <!-- 5. Defensa Especial -->
-            <include layout="@layout/item_stat" android:id="@+id/statSpDefense"/>
+            <include
+                android:id="@+id/statSpDefense"
+                layout="@layout/item_stat" />
             <!-- 6. Velocidad -->
-            <include layout="@layout/item_stat" android:id="@+id/statSpeed"/>
+            <include
+                android:id="@+id/statSpeed"
+                layout="@layout/item_stat" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

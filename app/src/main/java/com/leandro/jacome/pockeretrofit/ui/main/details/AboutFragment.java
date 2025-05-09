@@ -1,5 +1,26 @@
 package com.leandro.jacome.pockeretrofit.ui.main.details;
 
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_BLACK;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_BLUE;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_BROWN;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_GREEN;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_PINK;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_PURPLE;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_RED;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_WHITE;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.COLOR_YELLOW;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.EN_STR_ATTACK;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.EN_STR_DEFENSE;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.EN_STR_HP;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.EN_STR_SPEED;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.EN_STR_SP_ATTACK;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.EN_STR_SP_DEFENSE;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.ES_STR_ATTACK;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.ES_STR_DEFENSE;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.ES_STR_HP;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.ES_STR_SPEED;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.ES_STR_SP_ATTACK;
+import static com.leandro.jacome.pockeretrofit.utils.Constants.ES_STR_SP_DEFENSE;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.FORMAT_HEIGHT;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.FORMAT_WEIGHT;
 import static com.leandro.jacome.pockeretrofit.utils.Constants.TV_SET_XP;
@@ -46,11 +67,11 @@ public class AboutFragment extends Fragment {
     };
 
     private final String[] statKeys = {
-            "hp", "attack", "defense", "special-attack", "special-defense", "speed"
+            EN_STR_HP, EN_STR_ATTACK, EN_STR_DEFENSE, EN_STR_SP_ATTACK, EN_STR_SP_DEFENSE, EN_STR_SPEED
     };
 
     private final String[] statLabels = {
-            "HP", "Ataque", "Defensa", "Atq. Esp.", "Def. Esp.", "Velocidad"
+            ES_STR_HP, ES_STR_ATTACK, ES_STR_DEFENSE, ES_STR_SP_ATTACK, ES_STR_SP_DEFENSE, ES_STR_SPEED
     };
 
     private boolean isViewCreated = false;
@@ -85,7 +106,9 @@ public class AboutFragment extends Fragment {
         tvBaseExperience = view.findViewById(R.id.tvBaseExperience);
 
         isViewCreated = true;
-        updateUI(); // Llamamos a actualizar la UI si los datos ya llegaron
+        if (isViewCreated && pokemonDetails != null && imageUrl != null && pokemonSpecies != null) {
+            updateUI();
+        }
     }
 
     private void updateUI() {
@@ -121,7 +144,11 @@ public class AboutFragment extends Fragment {
                         int value = statMap.getOrDefault(statKeys[i], 0);
                         tvStatValue.setText(String.valueOf(value));
 
-                        int bgColor = getColorFromName(pokemonSpecies.getColorName());
+                        int bgColor = getResources().getColor(R.color.default_stat); // Color por defecto
+
+                        if (pokemonSpecies != null && pokemonSpecies.getColorName() != null) {
+                            bgColor = getColorFromName(pokemonSpecies.getColorName());
+                        }
 
                         progressBar.setProgress(value);
                         Drawable progressDrawable = progressBar.getProgressDrawable();
@@ -134,7 +161,6 @@ public class AboutFragment extends Fragment {
                         }
 
                     }
-
                 }
             }
         }
@@ -148,7 +174,7 @@ public class AboutFragment extends Fragment {
             }
 
             FrameLayout background = requireView().findViewById(R.id.imageBackgroundContainer);
-            if (background != null) {
+            if (pokemonSpecies != null && pokemonSpecies.getColorName() != null) {
                 int bgColor = getColorFromName(pokemonSpecies.getColorName());
                 GradientDrawable drawable = (GradientDrawable) getResources().getDrawable(R.drawable.rounded_bottom_background);
                 drawable.setColor(bgColor);
@@ -156,20 +182,30 @@ public class AboutFragment extends Fragment {
             }
         }
     }
+    public void setPokemonDetails(PokemonDetails pokemon, String imageUrl) {
+        this.pokemonDetails = pokemon;
+        this.imageUrl = imageUrl;
+        if (isViewCreated) updateUI();
+    }
+
+    public void setPokemonSpecies(PokemonSpecies desc) {
+        this.pokemonSpecies = desc;
+        if (isViewCreated) updateUI();
+    }
 
     private int getColorFromName(String name) {
         if (name == null) return getResources().getColor(R.color.default_bg);
 
         switch (name.toLowerCase()) {
-            case "red": return getResources().getColor(R.color.poke_red);
-            case "blue": return getResources().getColor(R.color.poke_blue);
-            case "green": return getResources().getColor(R.color.poke_green);
-            case "yellow": return getResources().getColor(R.color.poke_yellow);
-            case "purple": return getResources().getColor(R.color.poke_purple);
-            case "brown": return getResources().getColor(R.color.poke_brown);
-            case "pink": return getResources().getColor(R.color.poke_pink);
-            case "black": return getResources().getColor(R.color.poke_black);
-            case "white": return getResources().getColor(R.color.poke_white);
+            case COLOR_RED: return getResources().getColor(R.color.poke_red);
+            case COLOR_BLUE: return getResources().getColor(R.color.poke_blue);
+            case COLOR_GREEN: return getResources().getColor(R.color.poke_green);
+            case COLOR_YELLOW: return getResources().getColor(R.color.poke_yellow);
+            case COLOR_PURPLE: return getResources().getColor(R.color.poke_purple);
+            case COLOR_BROWN: return getResources().getColor(R.color.poke_brown);
+            case COLOR_PINK: return getResources().getColor(R.color.poke_pink);
+            case COLOR_BLACK: return getResources().getColor(R.color.poke_black);
+            case COLOR_WHITE: return getResources().getColor(R.color.poke_white);
             default: return getResources().getColor(R.color.default_bg);
         }
     }

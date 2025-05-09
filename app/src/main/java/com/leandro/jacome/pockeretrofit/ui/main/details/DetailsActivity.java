@@ -10,6 +10,7 @@ import static com.leandro.jacome.pockeretrofit.utils.Constants.STATS;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
@@ -31,6 +32,7 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private DetailsPagerAdapter pagerAdapter;
+    private ImageButton ibBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
         setupUI();
         presenter.loadPokemonDetails(name, imageUrl, id);
         presenter.loadDescription(id);
+
+        ibBack = findViewById(R.id.ibBack);
+        ibBack.setOnClickListener(v -> finish());
     }
 
     private void setupUI() {
@@ -75,6 +80,7 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
     public void showDescription(PokemonSpecies pokemonSpecies) {
         if (pagerAdapter != null) {
             pagerAdapter.setDescription(pokemonSpecies);
+            pagerAdapter.setEvolutionChainId(extractIdFromUrl(pokemonSpecies.getEvolutionChain().getUrl()));
         }
     }
 
@@ -84,5 +90,10 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
         intent.putExtra(IMAGEURL, pokemon.getImageUrl());
         intent.putExtra(ID, id);
         context.startActivity(intent);
+    }
+
+    private int extractIdFromUrl(String url) {
+        String[] parts = url.split("/");
+        return Integer.parseInt(parts[parts.length - 1]);
     }
 }

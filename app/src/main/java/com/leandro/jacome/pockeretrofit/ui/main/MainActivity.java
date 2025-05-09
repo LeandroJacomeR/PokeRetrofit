@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0: tab.setText(POKEDEX); break;
-                case 1: tab.setText(FAVORITES); break;
+                //case 1: tab.setText(FAVORITES); break;
                 default: tab.setText("Tab " + (position + 1)); break;
             }
         }).attach();

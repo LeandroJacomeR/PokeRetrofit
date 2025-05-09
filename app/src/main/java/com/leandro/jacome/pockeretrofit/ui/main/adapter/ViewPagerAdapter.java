@@ -15,7 +15,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2; // Pokédex y Favoritos
+        return 1; // TODO: implementar favoritos
     }
 
     @NonNull
@@ -23,7 +23,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: return new FragmentHome(); // Pokédex
-            case 1: return new FragmentHome(); // Debes crear este fragmento
+            //case 1: return new FragmentHome(); // Debes crear este fragmento
             default: return new FragmentHome(); // Fallback
         }
     }

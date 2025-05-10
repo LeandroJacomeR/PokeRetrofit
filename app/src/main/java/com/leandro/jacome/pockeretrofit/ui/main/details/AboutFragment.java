@@ -141,7 +141,7 @@ public class AboutFragment extends Fragment {
 
                         tvStatName.setText(statLabels[i]);
 
-                        int value = statMap.getOrDefault(statKeys[i], 0);
+                        int value = statMap.containsKey(statKeys[i]) ? statMap.get(statKeys[i]) : 0;
                         tvStatValue.setText(String.valueOf(value));
 
                         int bgColor = getResources().getColor(R.color.default_stat); // Color por defecto

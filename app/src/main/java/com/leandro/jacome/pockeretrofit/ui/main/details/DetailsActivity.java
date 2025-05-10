@@ -10,7 +10,10 @@ import static com.leandro.jacome.pockeretrofit.utils.Constants.STATS;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
@@ -33,6 +36,8 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
     private ViewPager2 viewPager;
     private DetailsPagerAdapter pagerAdapter;
     private ImageButton ibBack;
+    private LinearLayout errorContainer;
+    private TextView tvErrorMessage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +54,9 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
         setupUI();
         presenter.loadPokemonDetails(name, imageUrl, id);
         presenter.loadDescription(id);
+
+        errorContainer = findViewById(R.id.errorContainer);
+        tvErrorMessage = findViewById(R.id.tvErrorMessage);
 
         ibBack = findViewById(R.id.ibBack);
         ibBack.setOnClickListener(v -> finish());
@@ -84,6 +92,13 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
         }
     }
 
+    @Override
+    public void showError(String message) {
+        super.showError(message);
+        showErrorUI(message);
+    }
+
+
     public static void start(Context context, Pokemon pokemon, int id) {
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra(NAME, pokemon.getName());
@@ -95,5 +110,13 @@ public class DetailsActivity extends BaseActivity implements DetailsContract.Vie
     private int extractIdFromUrl(String url) {
         String[] parts = url.split("/");
         return Integer.parseInt(parts[parts.length - 1]);
+    }
+
+    private void showErrorUI(String message) {
+        if (tvErrorMessage != null) tvErrorMessage.setText(message);
+        if (errorContainer != null) errorContainer.setVisibility(View.VISIBLE);
+        if (viewPager != null) viewPager.setVisibility(View.GONE);
+        if (tabLayout != null) tabLayout.setVisibility(View.GONE);
+        findViewById(R.id.global_loader).setVisibility(View.GONE);
     }
 }

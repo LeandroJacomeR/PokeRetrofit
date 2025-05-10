@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -5,32 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Botón flotante encima de todo -->
-    <FrameLayout
+    <!-- Contenido principal -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/tabLayoutDetail"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="60dp"/>
 
-        <!-- Contenido principal -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPagerDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/tabLayoutDetail"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingBottom="60dp"/>
-
-        <!-- Botón atrás -->
-        <ImageButton
-            android:id="@+id/ibBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="16dp"
-            android:background="@null"
-            android:src="@drawable/back"
-            android:layout_gravity="start|top"/>
-    </FrameLayout>
-
-    <!-- Tabs abajo -->
+    <!-- TabLayout en la parte inferior -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutDetail"
         android:layout_width="match_parent"
@@ -42,6 +27,36 @@
         app:tabTextColor="@color/gray"
         android:paddingBottom="12dp"/>
 
-    <!-- Loader centrado -->
+    <!-- Error UI: Solo se muestra cuando hay error -->
+    <LinearLayout
+        android:id="@+id/errorContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No hay conexión a internet"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:padding="16dp"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <!-- Loader centrado (oculto por defecto) -->
     <include layout="@layout/view_global_loader"/>
+
+    <!-- Botón de retroceso siempre visible -->
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="@null"
+        android:src="@drawable/back"
+        android:layout_gravity="start|top"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
